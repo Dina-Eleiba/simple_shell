@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,5 +42,7 @@ int countPathTokens(char *path);
 char *handleExecutionError(char *argv[], char **command);
 void freeEnvironment(void);
 void deallocateBuffer(char **buffer);
- 
+
+
+
 #endif

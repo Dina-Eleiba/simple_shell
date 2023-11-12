@@ -7,28 +7,31 @@
 
 void deallocateBuffer(char **buffer)
 {
-    int i;
+	int i;
 
-    for (i = 0; buffer[i] != NULL; i++)
-    {
-        free(buffer[i]);
-    }
+	for (i = 0; buffer[i] != NULL; i++)
+	{
+		free(buffer[i]);
+	}
 
-    free(buffer);
+	free(buffer);
 }
-  
+
+
+
+
 /**
 * freeEnvironment - function that free environ
 */
 
 void freeEnvironment(void)
 {
-    int i;
+	int i;
 
-    for (i = 0; environ[i]; i++)
-    {
-        free(environ[i]);
-    }
+	for (i = 0; environ[i]; i++)
+	{
+		free(environ[i]);
+	}
 
-    free(environ);
+	free(environ);
 }

@@ -9,20 +9,21 @@
 char *findEnvironmentVariable(char *varName)
 {
 
-    int n = 0;
+	int n = 0;
 
-    int varNameLength = stringLength(varName);
+	int varNameLength = stringLength(varName);
 
-    for (n = 0; environ[n] != NULL; n++)
-    {
-        if (strncmp(varName, environ[n], varNameLength) == 0)
-        {
-            return (environ[n]);
-        }
-    }
+	for (n = 0; environ[n] != NULL; n++)
+	{
+		if (strncmp(varName, environ[n], varNameLength) == 0)
+		{
+			return (environ[n]);
+		}
+	}
 
-    return (NULL);
+	return (NULL);
 }
+
 
 /**
 * printAllEnvironmentVariables - print all the environment variables
@@ -32,25 +33,25 @@ char *findEnvironmentVariable(char *varName)
 
 void *printAllEnvironmentVariables(char **userCommand)
 {
-    int n;
+	int n;
 
-    int envCommandLength = stringLength("env");
+	int envCommandLength = stringLength("env");
 
-    if (userCommand == NULL || userCommand[0] == NULL)
-    {
-        return (0);
-    }
+	if (userCommand == NULL || userCommand[0] == NULL)
+	{
+		return (0);
+	}
 
-    if (strncmp(userCommand[0], "env", envCommandLength) == 0)
-    {
-        for (n = 0; environ[n] != NULL; n++)
-        {
-            write(STDOUT_FILENO, environ[n], stringLength(environ[n]));
-            write(STDOUT_FILENO, "\n", 1);
-        }
+	if (strncmp(userCommand[0], "env", envCommandLength) == 0)
+	{
+		for (n = 0; environ[n] != NULL; n++)
+		{
+			write(STDOUT_FILENO, environ[n], stringLength(environ[n]));
+			write(STDOUT_FILENO, "\n", 1);
+		}
 
-        freeEnvironment();
-    }
+		freeEnvironment();
+	}
 
-    return (0);
+	return (0);
 }

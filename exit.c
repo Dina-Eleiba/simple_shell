@@ -7,25 +7,24 @@
 
 void processExitCommand(char **commandTokens)
 {
-    int i;
+	int i;
 
-    int exitStatus;
+	int exitStatus;
 
-    for (i = 0; commandTokens[i] != NULL; i++)
-    {
-        if (strncmp(commandTokens[i], "exit", stringLength("exit")) == 0
-        && !commandTokens[i + 1])
-        {
-            cleanupAndExit(commandTokens, EXIT_SUCCESS);
-        }
-        else if (strncmp(commandTokens[i], "exit",
-	stringLength("exit")) == 0
-        && commandTokens[i + 1])
-        {
-            exitStatus = stringToInteger(commandTokens[i + 1]);
-            cleanupAndExit(commandTokens, exitStatus);
-        }
-    }
+	for (i = 0; commandTokens[i] != NULL; i++)
+	{
+		if (strncmp(commandTokens[i], "exit", stringLength("exit")) == 0
+		&& !commandTokens[i + 1])
+		{
+			cleanupAndExit(commandTokens, EXIT_SUCCESS);
+		}
+		else if (strncmp(commandTokens[i], "exit", stringLength("exit")) == 0
+		&& commandTokens[i + 1])
+		{
+			exitStatus = stringToInteger(commandTokens[i + 1]);
+			cleanupAndExit(commandTokens, exitStatus);
+		}
+	}
 }
 
 /**
@@ -37,6 +36,6 @@ void processExitCommand(char **commandTokens)
 
 void cleanupAndExit(char **commandTokens, int exitStatus)
 {
-    deallocateBuffer(commandTokens);
-    exit(exitStatus);
+	deallocateBuffer(commandTokens);
+	exit(exitStatus);
 }

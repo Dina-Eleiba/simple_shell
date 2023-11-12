@@ -9,32 +9,32 @@
 
 char *findExecutablePath(char *command)
 {
-    char *pathVariable;
+	char *pathVariable;
 
-    char **pathArray;
+	char **pathArray;
 
-    const char *delimiter = ":";
+	const char *delimiter = ":";
 
-    char *fullPath = NULL;
+	char *fullPath = NULL;
 
-    char *pathCopy;
+	char *pathCopy;
 
-    int num = 0;
+	int num = 0;
 
-    pathVariable = getenv("PATH");
-    if (pathVariable == NULL)
-    {
-        return (NULL);
-    }
-    num = countPathTokens(pathVariable);
-    pathCopy = malloc(stringLength(pathVariable) + 1);
-    stringCopy(pathCopy, pathVariable);
+	pathVariable = getenv("PATH");
+	if (pathVariable == NULL)
+	{
+		return (NULL);
+	}
+	num = countPathTokens(pathVariable);
+	pathCopy = malloc(stringLength(pathVariable) + 1);
+	stringCopy(pathCopy, pathVariable);
 
-    pathArray = tokenizeInput(pathCopy, num, delimiter);
-    free(pathCopy);
-    fullPath = constructFullPath(pathArray, command);
-    deallocateBuffer(pathArray);
-    return (fullPath);
+	pathArray = tokenizeInput(pathCopy, num, delimiter);
+	free(pathCopy);
+	fullPath = constructFullPath(pathArray, command);
+	deallocateBuffer(pathArray);
+	return (fullPath);
 }
 
 /**
@@ -46,42 +46,41 @@ char *findExecutablePath(char *command)
 
 char *constructFullPath(char **pathArray, char *command)
 {
-    int i;
+	int i;
 
-    struct stat fileStatus;
-    char *fullPath;
+	struct stat fileStatus;
+	char *fullPath;
 
-    int totalLength;
+	int totalLength;
 
-    char *separator = "/";
+	char *separator = "/";
 
-    int commandLength = stringLength(command);
+	int commandLength = stringLength(command);
 
-    for (i = 0; pathArray[i] != NULL; i++)
-    {
-        int pathLength = stringLength(pathArray[i]);
+	for (i = 0; pathArray[i] != NULL; i++)
+	{
+		int pathLength = stringLength(pathArray[i]);
 
-        totalLength = pathLength + commandLength + 2;
-        fullPath = malloc(totalLength);
-        if (fullPath == NULL)
-        {
-            return (NULL);
-        }
-        stringCopy(fullPath, pathArray[i]);
-        stringConcatenate(fullPath, separator);
-        stringConcatenate(fullPath, command);
+		totalLength = pathLength + commandLength + 2;
+		fullPath = malloc(totalLength);
+		if (fullPath == NULL)
+		{
+			return (NULL);
+		}
+		stringCopy(fullPath, pathArray[i]);
+		stringConcatenate(fullPath, separator);
+		stringConcatenate(fullPath, command);
 
-        if (stat(fullPath, &fileStatus) == 0
-	&& access(fullPath, X_OK) == 0)
-        {
-            return (fullPath);
-        }
-        else
-        {
-            free(fullPath);
-        }
-    }
-    return (NULL);
+		if (stat(fullPath, &fileStatus) == 0 && access(fullPath, X_OK) == 0)
+		{
+			return (fullPath);
+		}
+		else
+		{
+			free(fullPath);
+		}
+	}
+	return (NULL);
 }
 
 /**
@@ -92,22 +91,22 @@ char *constructFullPath(char **pathArray, char *command)
 
 int countPathTokens(char *path)
 {
-    char *pathCopy;
+	char *pathCopy;
 
-    int tokenCount = 0;
+	int tokenCount = 0;
 
-    char *token;
+	char *token;
 
-    const char *delimiter = ":";
+	const char *delimiter = ":";
 
-    pathCopy = duplicateString(path);
-    token = strtok(pathCopy, delimiter);
-    while (token != NULL)
-    {
-        tokenCount++;
-        token = strtok(NULL, delimiter);
-    }
-    free(pathCopy);
+	pathCopy = duplicateString(path);
+	token = strtok(pathCopy, delimiter);
+	while (token != NULL)
+	{
+		tokenCount++;
+		token = strtok(NULL, delimiter);
+	}
+	free(pathCopy);
 
-    return (tokenCount);
+	return (tokenCount);
 }

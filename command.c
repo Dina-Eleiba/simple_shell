@@ -7,56 +7,57 @@
 
 char **getInputCommand()
 {
-    char *inputBuffer = NULL;
-    size_t bufferSize = 0;
-    ssize_t bytesRead;
-    char **tokenizedCommand;
+	char *inputBuffer = NULL;
 
-    const char *delimiter = " \t\n";
+	size_t bufferSize = 0;
+	ssize_t bytesRead;
+	char **tokenizedCommand;
 
-    bytesRead = getline(&inputBuffer, &bufferSize, stdin);
+	const char *delimiter = " \t\n";
 
-    if (bytesRead == 0)
-    {
-        return (NULL);
-    }
+	bytesRead = getline(&inputBuffer, &bufferSize, stdin);
 
-    if (bytesRead == EOF)
-    {
-        if (isatty(STDIN_FILENO))
-        {
-            free(inputBuffer);
-            write(STDOUT_FILENO, "\n", 1);
-            exit(EXIT_SUCCESS);
-        }
-        else
-        {
-            free(inputBuffer);
-            exit(EXIT_SUCCESS);
-        }
-    }
+	if (bytesRead == 0)
+	{
+		return (NULL);
+	}
 
-    inputBuffer[bytesRead - 1] = '\0';
+	if (bytesRead == EOF)
+	{
+		if (isatty(STDIN_FILENO))
+		{
+			free(inputBuffer);
+			write(STDOUT_FILENO, "\n", 1);
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			free(inputBuffer);
+			exit(EXIT_SUCCESS);
+		}
+	}
 
-    tokenizedCommand = tokenizeInput(inputBuffer, bytesRead, delimiter);
+	inputBuffer[bytesRead - 1] = '\0';
 
-    processExitCommand(tokenizedCommand);
-    free(inputBuffer);
+	tokenizedCommand = tokenizeInput(inputBuffer, bytesRead, delimiter);
 
-    return tokenizedCommand;
+	processExitCommand(tokenizedCommand);
+	free(inputBuffer);
+
+	return (tokenizedCommand);
 }
 
 /**
-* checkIfInteractiveShell - Determine if the shell
-* is running in an active mode.
+* checkIfInteractiveShell - Determine if the shell is running
+* in an interactive mode.
 */
 
 void checkIfInteractiveShell(void)
 {
-    char *prompt = "$ ";
+	char *prompt = "$ ";
 
-    if (isatty(STDIN_FILENO))
-    {
-        write(STDOUT_FILENO, prompt, 2);
-    }
+	if (isatty(STDIN_FILENO))
+	{
+		write(STDOUT_FILENO, prompt, 2);
+	}
 }

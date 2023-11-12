@@ -8,13 +8,13 @@
 
 int stringLength(char *str)
 {
-    int length = 0;
+	int length = 0;
 
-    while (str[length] != '\0')
-    {
-        length++;
-    }
-    return length;
+	while (str[length] != '\0')
+	{
+		length++;
+	}
+	return (length);
 }
 
 /**
@@ -26,17 +26,18 @@ int stringLength(char *str)
 
 char *stringCopy(char *destination, char *source)
 {
-    int index;
-    int sourceLength = stringLength(source);
+	int index;
 
-    for (index = 0; source[index] != '\0' && index < sourceLength; index++)
-    {
-        destination[index] = source[index];
-    }
+	int sourceLength = stringLength(source);
 
-    destination[index] = '\0';
+	for (index = 0; source[index] != '\0' && index < sourceLength; index++)
+	{
+		destination[index] = source[index];
+	}
 
-    return destination;
+	destination[index] = '\0';
+
+	return (destination);
 }
 
 /**
@@ -47,26 +48,26 @@ char *stringCopy(char *destination, char *source)
 
 char *duplicateString(char *source)
 {
-    size_t length;
-    char *copyString;
+	size_t length;
+	char *copyString;
 
-    if (source == NULL)
-    {
-        return NULL;
-    }
+	if (source == NULL)
+	{
+		return (NULL);
+	}
 
-    length = stringLength(source);
+	length = stringLength(source);
 
-    copyString = malloc(sizeof(char) * (length + 1));
+	copyString = malloc(sizeof(char) * (length + 1));
 
-    if (copyString == NULL)
-    {
-        return NULL;
-    }
+	if (copyString == NULL)
+	{
+		return (NULL);
+	}
 
-    stringCopy(copyString, source);
+	stringCopy(copyString, source);
 
-    return copyString;
+	return (copyString);
 }
 
 /**
@@ -77,18 +78,20 @@ char *duplicateString(char *source)
 
 void reverseString(char *str, int length)
 {
-    int start = 0;
-    int end = length - 1;
-    char temp;
+	int start = 0;
 
-    while (start < end)
-    {
-        temp = str[start];
-        str[start] = str[end];
-        str[end] = temp;
-        start++;
-        end--;
-    }
+	int end = length - 1;
+
+	char temp;
+
+	while (start < end)
+	{
+		temp = str[start];
+		str[start] = str[end];
+		str[end] = temp;
+		start++;
+		end--;
+	}
 }
 
 /**
@@ -100,22 +103,23 @@ void reverseString(char *str, int length)
 
 char *stringConcatenate(char *destination, char *source)
 {
-    int i, j;
+	int i, j;
 
-    i = 0;
-    while (destination[i] != '\0')
-    {
-        i++;
-    }
+	i = 0;
+	while (destination[i] != '\0')
+	{
+		i++;
+	}
 
-    j = 0;
-    while (source[j] != '\0')
-    {
-        destination[i] = source[j];
-        i++;
-        j++;
-    }
+	j = 0;
+	while (source[j] != '\0')
+	{
+		destination[i] = source[j];
+		i++;
+		j++;
+	}
 
-    destination[i] = '\0';    
-    return destination;
+	destination[i] = '\0';
+
+	return (destination);
 }
